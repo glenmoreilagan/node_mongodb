@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
   const posts = new PostModel({
     title: "Title",
     slug: "Slug",
-    tags: [{ optionOne: "optionOne", optionTwo: "optionTwo" }]
+    // tags: ["tag1", 2, false]
   })
 
   try {
