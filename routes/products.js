@@ -2,11 +2,24 @@ const express = require("express");
 const router = express.Router();
 const ProductModel = require("../models/product");
 
+const Pusher = require("pusher");
+
+const pusher = new Pusher({
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_KEY,
+  secret: process.env.PUSHER_SECRET,
+  cluster: process.env.PUSHER_CLUSTER,
+  useTLS: true,
+});
+
 router.get("/", async (req, res) => {
   try {
     // finding from nested object
     // const products = await ProductModel.find({ "uom.amount": { $eq: "45.01" } });
-    
+    pusher.trigger(process.env.PUSHER_CHANNEL, "event-test-realtime", {
+      message: "hello world",
+    });
+
     const products = await ProductModel.find();
 
     res.json(products);
