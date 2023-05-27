@@ -1,22 +1,46 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const ProductSchema = mongoose.Schema({
-  name: {
+  productName: {
     type: String,
     required: true,
   },
-  uom: {
+  sku: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+  },
+  additionalInfo: {
+    type: String,
+  },
+  price: {
+    type: Number,
+  },
+  quantity: {
+    type: Number,
+  },
+  coffeeType: {
     type: Array,
-    default: [
-      { uom: "box", amount: "100.00" },
-      { uom: "pcs", amount: "10.00" },
-    ],
+  },
+  roastLevel: {
+    type: Array,
+  },
+  productImage: {
+    type: String,
+  },
+  productStatus: {
+    type: String,
   },
   createdAt: {
     type: Date,
-    required: true,
     default: Date.now,
   },
-});
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+})
 
-module.exports = mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model('Product', ProductSchema)
