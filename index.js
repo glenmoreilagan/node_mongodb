@@ -27,6 +27,10 @@ app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(express.static('uploads'))
+
+app.use('/product/images', express.static('product/images'))
+
 // app.use("/posts", require("./routes/posts"));
 app.use('/api/products', require('./routes/products'))
 

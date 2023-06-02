@@ -16,16 +16,28 @@ const fileSystem = require('fs')
 // });
 var storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, './uploads/products/')
+    callBack(null, './uploads/product/images')
   },
   filename: (req, file, callBack) => {
     callBack(null, 'PRDCT_IMG' + Date.now() + path.extname(file.originalname))
   },
 })
 const upload = multer({ storage: storage })
+
 router.get('/', async (req, res) => {
   try {
     const products = await ProductModel.find()
+
+    res.json(products)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const products = await ProductModel.find({ _id: id })
 
     res.json(products)
   } catch (error) {
@@ -57,7 +69,7 @@ router.post('/', upload.single('productImage'), async (req, res) => {
     price: +price,
     coffeeType: coffeeType.split(','),
     roastLevel: roastLevel.split(','),
-    productImage: req.file?.path || '',
+    productImage: req.file?.filename || '',
     productStatus: productStatus,
   })
 
