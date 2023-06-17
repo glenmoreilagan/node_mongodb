@@ -33,6 +33,8 @@ app.use('/product/images', express.static('product/images'))
 
 // app.use("/posts", require("./routes/posts"));
 app.use('/api/products', require('./routes/products'))
+app.use('/api/categories', require('./routes/categories'))
+app.use('/api/brands', require('./routes/brands'))
 
 const PORT = process.env.PORT || 3000
 
